@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "mybatis-3-mapper.dtd">
+<!-- namespace和接口的完整路径相同 -->
+<mapper namespace="cn.v.dao.CommdoityMapper">
+
+    <select id="querycommdoity" resultType="commdoity">
+        SELECT * FROM commdoity WHERE vipid=#{vipid}
+    </select>
+
+    <resultMap id="cc" type="commdoity">
+        <result property="commdoityscore" column="commdoityscore"></result>
+        <result property="isture" column="isture"></result>
+    </resultMap>
+    <select id="querycommdoity2" resultMap="cc">
+        SELECT *
+        FROM commdoity a
+        left join exchange b
+        on a.commodityid = b.commodityid
+        where a.vipid = #{vipid}
+    </select>
+
+    <select id="getById" resultType="commdoity">
+        SELECT * FROM commdoity WHERE commodityid=#{id}
+    </select>
+
+    <insert id="add">
+
+        INSERT INTO vip.commdoity
+        (commodityid,
+        commodityname,
+        buynumber,
+        price,
+        totalprice,
+        vipid,
+        createTime
+        )
+        VALUES
+        ('commodityid',
+        'commodityname',
+        'buynumber',
+        'price',
+        'totalprice',
+        'vipid',
+        'createTime'
+        );
+    </insert>
+</mapper>

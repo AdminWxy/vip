@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "mybatis-3-mapper.dtd">
+<!-- namespace和接口的完整路径相同 -->
+<mapper namespace="cn.v.dao.ExchangeMapper">
+
+	<select id="queryexchange" resultType="Exchange">
+
+		SELECT  e.commodityid,e.commdoityscore,e.isture,c.commodityname,e.isture
+		FROM exchange e
+		LEFT JOIN commdoity c
+		ON e.commodityid=c.commodityid
+
+	</select>
+
+
+	<select id="consumptioncount" resultType="int">
+		SELECT  COUNT(1)FROM commdoity WHERE YEAR(createTime)='2019'AND vipid=#{vipid};
+	</select>
+</mapper>
